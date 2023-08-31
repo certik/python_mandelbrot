@@ -16,6 +16,8 @@ def mandelbrot_kernel2(c):
     z = c
     nv = 0
     for i in range(MAX_ITERS):
+        # TODO: rewrite this using masks, "nv" becomes a vector, only update
+        # iters where mask abs(z) < 2. Then return iters.
         if abs(z) > 2:
             break
         z = z*z + c  # z**2 + c is slower
