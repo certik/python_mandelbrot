@@ -7,7 +7,7 @@ def mandelbrot_kernel(c):
     for i in range(MAX_ITERS):
         if abs(z) > 2:
             break
-        z = z*z + c
+        z = z*z + c  # z**2 + c is slower
         nv += 1
     return nv
 
