@@ -47,9 +47,6 @@ for h in range(height):
         w = np.arange(w0*simd_width, (w0+1)*simd_width, dtype=np.int32)
         cx = min_x + w * scale_x
         x[:] = cx + 1j*cy
-        # Works:
-        #output[h,w] = mandelbrot_kernel(x[0])
-        # Does not work:
         output[h,w] = mandelbrot_kernel2(x)
 
 print(output)
