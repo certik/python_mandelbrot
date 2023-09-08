@@ -1,7 +1,7 @@
 import numpy as np
 
 ITERATIONS = 100
-n = 256
+n = 4
 DENSITY = 4096 // n
 x_min, x_max = -2.0, 0.47
 y_min, y_max = -1.12, 1.12
