@@ -26,7 +26,7 @@ def mandelbrot_kernel2(c):
         nv[mask] += 1
     return nv
 
-n = 512
+n = 16
 height = 4096 // n
 width = 4096 // n
 min_x = -2.0
@@ -35,7 +35,8 @@ min_y = -1.12
 max_y = 1.12
 scale_x = (max_x - min_x) / width
 scale_y = (max_y - min_y) / height
-simd_width = 1
+simd_width = 256
+assert simd_width <= width
 
 output = np.empty((height,width), dtype=np.int32)
 
