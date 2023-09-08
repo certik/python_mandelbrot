@@ -14,26 +14,26 @@ def mandelbrot_kernel(c):
 # c: Annotated[c64[:], SIMD]
 def mandelbrot_kernel2(c):
     z = c
-    nv = 0
+    nv = np.zeros(c.shape, dtype=np.float32)
+    in_set_mask = np.empty(c.shape, dtype=np.bool8)
+    in_set_mask[:] = True
     for i in range(MAX_ITERS):
-        # TODO: rewrite this using masks, "nv" becomes a vector, only update
-        # iters where mask abs(z) < 2. Then return iters.
-        if abs(z) > 2:
-            break
-        z = z*z + c  # z**2 + c is slower
-        nv += 1
+        if (all(in_set_mask == False)): break
+        in_set_mask[:] = (abs(z) <= 2)
+        nv[in_set_mask] += 1
+        z[in_set_mask] = z[in_set_mask]*z[in_set_mask] + c[in_set_mask]  # z**2 + c is slower
     return nv
 
-n = 32
-height = 4096
-width = 4096
+n = 512
+height = 4096 // n
+width = 4096 // n
 min_x = -2.0
 max_x = 0.47
 min_y = -1.12
 max_y = 1.12
 scale_x = (max_x - min_x) / width
 scale_y = (max_y - min_y) / height
-simd_width = 512
+simd_width = 1
 
 output = np.empty((height,width), dtype=np.float64)
 
