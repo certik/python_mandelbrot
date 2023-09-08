@@ -15,7 +15,7 @@ def mandelbrot_kernel(c):
 def mandelbrot_kernel2(c):
     z = np.empty(c.shape, dtype=np.complex128)
     z[:] = c[:]
-    nv = np.zeros(c.shape, dtype=np.int32)
+    nv = np.zeros(c.shape, dtype=np.int8)
     # True if the point is in set, False otherwise
     mask = np.empty(c.shape, dtype=np.bool_)
     for i in range(MAX_ITERS):
@@ -38,7 +38,7 @@ scale_y = (max_y - min_y) / height
 simd_width = 512
 assert simd_width <= width
 
-output = np.empty((height,width), dtype=np.int32)
+output = np.empty((height,width), dtype=np.int8)
 
 x = np.empty((simd_width), dtype=np.complex128)
 for h in range(height):
