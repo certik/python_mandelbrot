@@ -26,7 +26,7 @@ def mandelbrot_kernel2(c):
         nv[mask] += 1
     return nv
 
-n = 4
+n = 8
 height = 4096 // n
 width = 4096 // n
 min_x = -2.0
